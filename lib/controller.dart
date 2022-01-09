@@ -35,13 +35,12 @@ class Controller extends GetxController {
       final cidade = controlleCidade.text;
       final estado = controlleEstado.text;
 
-      final url =
-          'https://api.hgbrasil.com/weather?key=694f75e1&city_name=$cidade,$estado/';
+      var url = Uri.parse('https://api.hgbrasil.com/weather?key=44379bd9&city_name=$cidade,$estado');
 
-      http.Response resposta = await http.get(Uri.parse(url));
+      var resposta = await http.get(url);
       //pegando os dados da url que retornam um dado futuro
 
-      final retorno = json.decode(resposta.body) as Map<String, dynamic>;
+      final retorno = jsonDecode(resposta.body) as Map<String, dynamic>;
       //convertendo o corpo da resposta em json
 
       final city = retorno['results']['city'];
@@ -55,14 +54,14 @@ class Controller extends GetxController {
           descricao == null &&
           data == null &&
           hora == null) {
-        throw Exception();
-      } else {
+        throw Exception(); 
+      } else { 
         info.value =
             'Hoje ($data) em $city está com o tempo $descricao, com temperatura $temperaturaº.\n Ultima medição: $hora ';
       }
     } catch (err) {
       statusError.value = true;
-      info.value = 'Erro ao buscar dados';
+      info.value = 'Erro ao carregar dados';
     }
   }
 }
