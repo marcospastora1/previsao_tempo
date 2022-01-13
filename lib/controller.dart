@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class Controller extends GetxController {
   final info = 'Informe a cidade e estado'.obs;
 
-  var statusError = false.obs;
+  final statusError = false.obs;
 
   final controlleCidade = TextEditingController();
   final controlleEstado = TextEditingController();
@@ -35,9 +35,10 @@ class Controller extends GetxController {
       final cidade = controlleCidade.text;
       final estado = controlleEstado.text;
 
-      var url = Uri.parse('https://api.hgbrasil.com/weather?key=44379bd9&city_name=$cidade,$estado');
+      final url = Uri.parse(
+          'https://api.hgbrasil.com/weather?key=44379bd9&city_name=$cidade,$estado');
 
-      var resposta = await http.get(url);
+      final resposta = await http.get(url);
       //pegando os dados da url que retornam um dado futuro
 
       final retorno = jsonDecode(resposta.body) as Map<String, dynamic>;
@@ -54,8 +55,8 @@ class Controller extends GetxController {
           descricao == null &&
           data == null &&
           hora == null) {
-        throw Exception(); 
-      } else { 
+        throw Exception();
+      } else {
         info.value =
             'Hoje ($data) em $city está com o tempo $descricao, com temperatura $temperaturaº.\n Ultima medição: $hora ';
       }

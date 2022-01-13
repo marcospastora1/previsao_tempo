@@ -12,7 +12,9 @@ class HomePage extends GetView<Controller> {
         title: const Text('Tempo agora'),
         actions: [
           IconButton(
-              onPressed: controller.limpar, icon: const Icon(Icons.refresh))
+            onPressed: controller.limpar,
+            icon: const Icon(Icons.refresh),
+          )
         ],
       ),
       body: SingleChildScrollView(
@@ -21,16 +23,21 @@ class HomePage extends GetView<Controller> {
           children: [
             const Icon(Icons.cloud, size: 120),
             controller.buildTextField('Cidade', controller.controlleCidade),
-            controller.buildTextField('Estado (sigla)', controller.controlleEstado),
+            controller.buildTextField(
+                'Estado (sigla)', controller.controlleEstado),
             Padding(
               padding: const EdgeInsets.only(top: 15, bottom: 15),
               child: Obx(() {
                 if (controller.statusError.value = false) {
-                  return Text(controller.info.value,
-                      style: const TextStyle(fontSize: 20));
+                  return Text(
+                    controller.info.value,
+                    style: const TextStyle(fontSize: 20),
+                  );
                 } else {
-                  return Text(controller.info.value,
-                      style: const TextStyle(fontSize: 20));
+                  return Text(
+                    controller.info.value,
+                    style: const TextStyle(fontSize: 20),
+                  );
                 }
               }),
             ),
